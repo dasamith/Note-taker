@@ -18,13 +18,25 @@ app.get('/', function (req, res) {
 })
 
 app.get('/notes', function (req, res) {
+    console.log('We hit the /notes route!!')
     //res.send('notes file coming soon!!')
     res.sendFile(path.join(__dirname + '/public/notes.html'));
 })
 
+app.get('/api/notes', function (req, res) {
+    console.log('We hit the /notes route!!')
+    //res.send('notes file coming soon!!')
+    //res.sendFile(path.join(__dirname + '/public/notes.html'));
+    res.json(dbArray)
+})
+
+
 app.post('/api/notes', function (req, res) {
     console.log('we hit the route!!!!!!', req.body)
+    req.body.id = dbArray.length + 1
+    console.log("dbArray", dbArray.length);
     dbArray.push(req.body)
+    console.log('our dbarray after push', dbArray);
     //res.send('notes file coming soon!!')
     //res.sendFile(path.join(__dirname + '/public/notes.html'));
 })
