@@ -29,6 +29,40 @@ app.get('/api/notes', function (req, res) {
     //res.sendFile(path.join(__dirname + '/public/notes.html'));
     res.json(dbArray)
 })
+app.delete('/api/notes/:id', function (req, res) {
+    console.log('We hit the delete route!!', req.params)
+
+    // make an empty array to fill up with all the ppl we wat to keep
+
+    //for loop thru our dbArray and do a if statement each time dbArray[i].id === req.params.id
+    //if its a match we want to delete - don't add it to our empty array above
+    //else if they don't match we ant to keep it! add it ot the empty array above
+
+    var people = []
+    for (let i = 0; i < dbArray.length; i++) {
+
+        if (dbArray[i].id === parseInt(req.params.id)) {
+            console.log('deleted', dbArray[i]);
+
+        }
+        else {
+            console.log('we want to keep it', dbArray[i]);
+            people.push(dbArray[i])
+        }
+
+    }
+
+    console.log("this is our people to keep", people);
+    dbArray = people
+
+
+
+
+    //res.send('notes file coming soon!!')
+    //res.sendFile(path.join(__dirname + '/public/notes.html'));
+    res.json(dbArray)
+})
+
 
 
 app.post('/api/notes', function (req, res) {
